@@ -44,6 +44,7 @@ const modalConfirmBtn = document.getElementById('modalConfirmBtn');
 const modalCancelBtn = document.getElementById('modalCancelBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const toast = document.getElementById('toast');
+const themeToggle = document.getElementById('themeToggle');
 
 let currentUser = null;
 let selectedPostId = null;
@@ -53,6 +54,7 @@ let pendingConfirm = null;
 const USERS_KEY = 'blog_users';
 const CURRENT_USER_KEY = 'blog_current_user';
 const POSTS_KEY = 'blog_posts';
+const THEME_KEY = 'blog_theme';
 
 function getUsers() {
   const stored = localStorage.getItem(USERS_KEY);
@@ -281,6 +283,7 @@ function closeProfileForm() {
 }
 
 function loadApp() {
+  initTheme();
   currentUser = getCurrentUser();
   updateHeader();
 
@@ -490,5 +493,14 @@ closeModalBtn.addEventListener('click', () => {
 overlay.addEventListener('click', event => {
   if (event.target === overlay) closeOverlay();
 });
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    const newTheme = isDark ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, newTheme);
+    applyTheme(newTheme);
+  });
+}
 
 window.addEventListener('load', loadApp);
