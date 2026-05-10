@@ -134,7 +134,13 @@ function showModal(title, message, options = {}) {
 }
 
 function verifyImageUrl(url) {
-  return url && url.startsWith('http');
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
 }
 
 function setAvatarElement(element, avatarUrl, name) {
@@ -204,10 +210,14 @@ function renderPosts() {
   posts.forEach(post => {
     const card = document.createElement('div');
     card.className = 'post-card';
-    card.innerHTML = `
-      <h3>${post.title}</h3>
-      <small>${new Date(post.date).toLocaleString()}</small>
-    `;
+    
+    const title = document.createElement('h3');
+    title.textContent = post.title;
+    const date = document.createElement('small');
+    date.textContent = new Date(post.date).toLocaleString();
+
+    card.appendChild(title);
+    card.appendChild(date);
     card.addEventListener('click', () => showPostDetail(post.id));
     postList.appendChild(card);
   });
