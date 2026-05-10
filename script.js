@@ -2,7 +2,7 @@ const authSection = document.getElementById('auth-section');
 const blogSection = document.getElementById('blog-section');
 const welcomeText = document.getElementById('welcome-text');
 const logoutBtn = document.getElementById('logoutBtn');
-const tabs = document.querySelectorAll('.tab');
+const tabs = document.querySelectorAll('.auth-tab');
 const authViews = document.querySelectorAll('.auth-view');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
@@ -287,7 +287,8 @@ function loadApp() {
 
 tabs.forEach(tab => {
   tab.addEventListener('click', event => {
-    highlightTab(event.target.dataset.target);
+    const targetTab = event.currentTarget;
+    highlightTab(targetTab.dataset.target);
   });
 });
 
