@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "username": "maria",
+      "displayName": "María Pérez",
+      "avatarUrl": "https://ui-avatars.com/api/?name=Mar%C3%ADa+P%C3%A9rez&background=2E6EF7&color=fff",
+      "bio": "Amante de la programación y los blogs.",
+      "passwordHash": "e3afed0047b08059d0fada10f400c1e5"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post_1",
+      "title": "Mi primera publicación",
+      "content": "Este es un ejemplo de cómo se pueden guardar los datos en formato JSON.",
+      "date": "2026-05-10T12:00:00.000Z",
+      "author": "maria"
+    }
+  ]
+}

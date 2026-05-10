@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Personal con Autenticación</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="header-title">✨ Blog Personal</h1>
+        <p id="welcome-text" class="header-subtitle">Inicia sesión o regístrate para comenzar.</p>
+      </div>
+      <div class="header-actions">
+        <button id="logoutBtn" class="btn btn-logout hidden">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="auth-section" class="auth-wrapper">
+        <div class="auth-container">
+          <div class="auth-header">
+            <h2>Bienvenido a tu Blog</h2>
+            <p>Comparte tus historias con el mundo</p>
+          </div>
+
+          <div class="auth-tabs-wrapper">
+            <div class="auth-tabs">
+              <button class="auth-tab active" data-target="login-view">
+                <span class="tab-icon">🔐</span>
+                <span>Iniciar sesión</span>
+              </button>
+              <button class="auth-tab" data-target="register-view">
+                <span class="tab-icon">✍️</span>
+                <span>Registrarse</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="login-view" class="auth-view">
+            <form id="loginForm" class="form">
+              <div class="input-group">
+                <label for="loginUsername">Usuario</label>
+                <input type="text" id="loginUsername" placeholder="Tu usuario" required />
+              </div>
+              <div class="input-group">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" placeholder="Tu contraseña" required />
+              </div>
+              <button type="submit" class="btn btn-primary btn-large">Entrar a mi blog</button>
+            </form>
+          </div>
+
+          <div id="register-view" class="auth-view hidden">
+            <form id="registerForm" class="form">
+              <div class="input-group">
+                <label for="registerUsername">Usuario</label>
+                <input type="text" id="registerUsername" placeholder="Elige tu usuario" required />
+              </div>
+              <div class="input-group">
+                <label for="registerDisplayName">Nombre visible</label>
+                <input type="text" id="registerDisplayName" placeholder="Tu nombre en el blog" required />
+              </div>
+              <div class="input-group">
+                <label for="registerAvatar">URL de avatar</label>
+                <input type="url" id="registerAvatar" placeholder="https://ejemplo.com/avatar.jpg" />
+              </div>
+              <div class="input-group">
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" required minlength="6" />
+              </div>
+              <div class="input-group">
+                <label for="registerConfirmPassword">Confirmar contraseña</label>
+                <input type="password" id="registerConfirmPassword" placeholder="Repite tu contraseña" required minlength="6" />
+              </div>
+              <button type="submit" class="btn btn-primary btn-large">Crear mi cuenta</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="blog-section" class="hidden">
+        <div class="row">
+          <div class="column sidebar">
+            <div class="profile-card card">
+              <div class="profile-avatar" id="profileAvatar"></div>
+              <div>
+                <h2 id="profileName">Usuario</h2>
+                <p id="profileUsername" class="muted">@usuario</p>
+                <p id="profileBio" class="muted profile-bio">Perfil personalizado con avatar y datos guardados.</p>
+              </div>
+              <button id="editProfileBtn" class="btn btn-secondary full-width">Editar perfil</button>
+            </div>
+
+            <button id="newPostBtn" class="btn btn-primary full-width">Nueva publicación</button>
+            <div class="post-list card compact" id="postList"></div>
+          </div>
+
+          <div class="column content">
+            <div id="blogHome" class="card">
+              <h2>Publicaciones</h2>
+              <p class="muted">Selecciona una entrada para ver detalles, edita tu perfil, o crea una nueva publicación.</p>
+            </div>
+
+            <div id="profileFormSection" class="card hidden">
+              <h2>Editar perfil</h2>
+              <form id="profileForm" class="form">
+                <label>
+                  Nombre visible
+                  <input type="text" id="profileDisplayName" required />
+                </label>
+                <label>
+                  URL de avatar
+                  <input type="url" id="profileAvatarUrl" placeholder="https://..." />
+                </label>
+                <label>
+                  Biografía
+                  <textarea id="profileBioInput" rows="4" placeholder="Escribe algo sobre ti..."></textarea>
+                </label>
+                <div class="preview-row">
+                  <div class="profile-preview-card card compact">
+                    <div class="profile-avatar preview-avatar" id="previewAvatar"></div>
+                    <div>
+                      <p class="muted">Vista previa del avatar</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Guardar perfil</button>
+                  <button type="button" id="cancelProfileBtn" class="btn btn-secondary">Cancelar</button>
+                </div>
+              </form>
+            </div>
+
+            <div id="postFormSection" class="card hidden">
+              <h2 id="formTitle">Nueva publicación</h2>
+              <form id="postForm" class="form">
+                <label>
+                  Título
+                  <input type="text" id="postTitle" required />
+                </label>
+                <label>
+                  Contenido
+                  <textarea id="postContent" rows="8" required></textarea>
+                </label>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="button" id="cancelPostBtn" class="btn btn-secondary">Cancelar</button>
+                </div>
+              </form>
+            </div>
+
+            <div id="postDetailSection" class="card hidden">
+              <article id="postDetail"></article>
+              <div class="detail-actions">
+                <button id="editPostBtn" class="btn">Editar</button>
+                <button id="deletePostBtn" class="btn btn-danger">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay hidden">
+    <div class="modal" id="modalWindow">
+      <div class="modal-header">
+        <h3 id="modalTitle">Mensaje</h3>
+        <button id="closeModalBtn" class="modal-close">×</button>
+      </div>
+      <p id="modalMessage"></p>
+      <div class="modal-actions">
+        <button id="modalCancelBtn" class="btn btn-secondary hidden">Cancelar</button>
+        <button id="modalConfirmBtn" class="btn btn-primary hidden">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <footer class="footer">
+    <p>Blog con autenticación básica, perfil de usuario y persistencia en LocalStorage.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
