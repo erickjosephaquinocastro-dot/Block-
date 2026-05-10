@@ -114,6 +114,21 @@ function closeOverlay() {
   pendingConfirm = null;
 }
 
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.body.classList.add('dark-mode');
+    if (themeToggle) themeToggle.textContent = '☀️';
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeToggle) themeToggle.textContent = '🌙';
+  }
+}
+
+function initTheme() {
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+  applyTheme(savedTheme);
+}
+
 function showNotification(message) {
   toast.textContent = message;
   toast.classList.remove('hidden');

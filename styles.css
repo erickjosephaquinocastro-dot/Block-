@@ -1,18 +1,33 @@
 :root {
-  --bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-  --surface: #1e293b;
-  --primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   --primary-solid: #3b82f6;
   --primary-dark: #1e40af;
-  --accent: #f59e0b;
+  --accent: #ef4444; /* Rojo para acentos */
   --success: #10b981;
   --danger: #ef4444;
-  --text: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --muted: #94a3b8;
-  --border: #334155;
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 40px 80px rgba(0, 0, 0, 0.5);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+  --bg: #000000; /* Negro puro */
+  --surface: #0a0a0a; /* Gris casi negro */
+  --primary: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%); /* Azul neón */
+  --primary-solid: #00d2ff;
+  --accent: #ff003c; /* Rojo eléctrico */
+  --text: #ffffff;
+  --text-secondary: #94a3b8;
+  --muted: #475569;
+  --border: #1e293b;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 40px 80px rgba(0, 0, 0, 0.9);
+  background-image: radial-gradient(circle at top right, #001a33, #000000);
 }
 
 * {
